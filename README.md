@@ -1,5 +1,16 @@
 # LLM-Pretraining-Data-Pipeline
 
+**Title:** Mainpipe Data Preparation Pipeline<br>
+**Author:** Mary Kolyaei<br>
+**Email:** maryamkolyaie@gmail.com<br>
+**Sources:** <br>
+AWS: https://aws.amazon.com/blogs/machine-learning/an-introduction-to-preparing-your-own-dataset-for-llm-training/<br>
+Hugging Face: https://huggingface.co/docs/datasets/en/quickstart<br>
+https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
+**Language:** Python 3.10.10<br>
+
+
+
 !python run_pipeline.py #executes every stage of the end-to-end data pipeline
 
 🌱 Stage 1 — Ingestion
