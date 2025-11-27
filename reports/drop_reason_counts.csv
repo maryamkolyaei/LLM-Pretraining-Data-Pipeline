@@ -1,0 +1,13 @@
+drop_reason,count
+exact_duplicate,46053
+too_short_chars,1115
+too_long,759
+low_alpha_ratio,521
+too_short,349
+high_repetition,271
+too_short_words,199
+pii_heavy,121
+near_duplicate,117
+high_toxicity,26
+blocked_url,9
+numeric_like,1
