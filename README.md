@@ -11,7 +11,7 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 
 **The pipeline is orchestrated via:**
 - 1. Install dependencies: pip install -r requirements.txt, pereferably in a clean environment and 2. python run_pipeline.py
-- 2. Run inside Docker
+- 2. A Dockerfile is also provided for containerised execution.
 
 
 !python run_pipeline.py #executes every stage of the end-to-end data pipeline
@@ -115,15 +115,13 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 📊 Metrics & Inspectability:
 
 🧨 Scaling Plan (Distributed) and Improvements for future : 
-- The current approach was selected for a take-home task, the current dataset 
--Scalable approach would be:
-1. Hash via pyspark
-2. Join back to mark duplicates
-3. Faster tokeniser implementations (Rust-based tokenisers)
-4. In this project, I performed language detection using the Lingua library. However, Lingua is computationally heavy because it loads multiple statistical language models into memory. To scale this stage, I would consider replacing or optimising Lingua using, for example a lightweight supervised ML model.
+- The current implementation is lightweight for a take-home exercise, it processes the provided dataset on a single machine in a research compuiting portal equipped with 32 virtual CPUs and 128GB of RAM. I used Python/Pandas for clarity and reproducibility.
+  
+-An scalable approach would be:
+1. At real scale, however, the pipeline would run on a distributed compute cluster, and the entire workflow changes to accommodate multi-billion-document datasets. For large datasets, all heavy lifting would be done using PySpark, where Spark reads thousands of files in parallel from S3/GCS rather than loading data locally. Data cleaning, normalisation, and filtering run as distributed map operations, and memory pressure is handled automatically by Spark executors rather than the local machine. Deduplication also changes: instead of grouping in Pandas, we compute a strong hash (e.g., SHA256) for each cleaned document using a Spark UDF, repartition the dataset by a hash prefix so that all potential duplicates land on the same worker, and then drop duplicates inside each hash bucket. This pattern keeps deduplication scalable and avoids expensive shuffles
+
+2. Near-duplicate detection would rely on Spark-compatible approaches such as MinHash/LSH or SimHash to cluster similar documents across the corpus. Tokenisation also needs to scale dramatically. Rather than relying on Python tokenisers, which are slow and single-threaded. This can be done directly inside Spark.
+
+3. Language detection would also be redesigned. In this project I used Lingua because it is accurate, but Lingua loads multiple statistical language models into memory and becomes too heavy when scaled up. In a production setting, I would consider replacing or optimising Lingua with a lightweight supervised ML model that runs efficiently in batches. Additional large-scale improvements include hashed partitions that make incremental deduplication cheap
 
 
-For large datasets we use spark, Batch Tokenisation, Shards: (use 50k–100k docs per shard, Write shards in parallel,
-- hashed partitions for dedup
-- LM-based perplexity filtering
-- distributed tokenisation
