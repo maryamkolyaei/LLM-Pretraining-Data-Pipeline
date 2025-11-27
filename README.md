@@ -9,6 +9,8 @@ Hugging Face: https://huggingface.co/docs/datasets/en/quickstart<br>
 https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 **Language:** Python 3.10.10<br>
 
+**The pipeline is orchestrated via:** 1. Install dependencies: pip install -r requirements.txt pereferably in new environment and 2. python run_pipeline.py
+
 
 
 !python run_pipeline.py #executes every stage of the end-to-end data pipeline
