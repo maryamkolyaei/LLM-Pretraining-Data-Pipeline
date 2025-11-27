@@ -21,7 +21,6 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 **Input:** `mainpipe_data_v1.jsonl`  
 **Output:** `mainpipe_ingested_v1.parquet`
 
-### Steps
 - Loads raw `.jsonl` dataset  
 - Creates stable `doc_id` using SHA1 hash  
 - Adds ingestion timestamp (`ingest_ts`)  
@@ -35,7 +34,6 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 **Input:** mainpipe_ingested_v1.parquet
 **Outputs:** mainpipe_cleaned_v2.parquet  &  mainpipe_cleaned_v2.jsonl  &  mainpipe_dropped_v2.parquet
 
-### Steps
 - Removes empty, whitespace & extremely short texts
 - Normalises whitespace & punctuation
 - Computes basic content stats
@@ -48,7 +46,6 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 **Input:** mainpipe_cleaned_v2.parquet
 **Outputs:** mainpipe_cleaned_v4.parquet  &  mainpipe_dropped_v4.parquet  &  mainpipe_cleaned_v4.jsonl
 
-### Steps
 - Removes HTML tags
 - Removes boilerplate (cookie banners, footers, disclaimers)
 - Normalises repeated characters
@@ -66,7 +63,6 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 **Input:** mainpipe_cleaned_v4.parquet
 **Outputs:** mainpipe_cleaned_v5.parquet  &  mainpipe_dropped_v5.parquet  &  mainpipe_cleaned_v5.jsonl
 
-### Steps
 - Builds canonical version of each text
 - Exact dedup: SHA256 hash
 - Near-dup: match first 500 chars of canonical text
@@ -79,7 +75,6 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 **Input:** mainpipe_cleaned_v5.parquet
 **Outputs:**  mainpipe_scored_v6.parquet  &  mainpipe_scored_v6.jsonl
 
-### Steps
 - Computes quality_score ∈ [0, 1] using:
 - language confidence
 - token count
@@ -93,7 +88,6 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 **Input:** mainpipe_scored_v6.parquet
 **Outputs:** mainpipe_tokenised_v7.parquet  &  train_web_sample_tokenised.jsonl
 
-### Steps
 - Loads HuggingFace tokenizer (GPT-2)
 - input_ids
 - attention_mask
@@ -108,7 +102,6 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 **Input:** mainpipe_tokenised_v7.parquet
 **Outputs:** Shard files (e.g., train_shard_00001.jsonl, train_shard_00002.jsonl, …)  &  manifest.json  &  tiny_train.jsonl
 
-### Steps
 - Splits tokenised dataset into smaller .jsonl chunks
 - Writes a manifest describing:
 - number of shards
