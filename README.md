@@ -9,8 +9,9 @@ Hugging Face: https://huggingface.co/docs/datasets/en/quickstart<br>
 https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 **Language:** Python 3.10.10<br>
 
-**The pipeline is orchestrated via:** 1. Install dependencies: pip install -r requirements.txt pereferably in new environment and 2. python run_pipeline.py
-
+**The pipeline is orchestrated via:**
+- 1. Install dependencies: pip install -r requirements.txt, pereferably in a clean environment and 2. python run_pipeline.py
+- 2. Run inside Docker
 
 
 !python run_pipeline.py #executes every stage of the end-to-end data pipeline
@@ -109,3 +110,20 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 - total tokens
 - tokenizer name
 - file paths
+
+
+📊 Metrics & Inspectability:
+
+🧨 Scaling Plan (Distributed) and Improvements for future : 
+- The current approach was selected for a take-home task, the current dataset 
+-Scalable approach would be:
+1. Hash via pyspark
+2. Join back to mark duplicates
+3. Faster tokeniser implementations (Rust-based tokenisers)
+4. In this project, I performed language detection using the Lingua library. However, Lingua is computationally heavy because it loads multiple statistical language models into memory. To scale this stage, I would consider replacing or optimising Lingua using, for example a lightweight supervised ML model.
+
+
+For large datasets we use spark, Batch Tokenisation, Shards: (use 50k–100k docs per shard, Write shards in parallel,
+- hashed partitions for dedup
+- LM-based perplexity filtering
+- distributed tokenisation
