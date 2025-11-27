@@ -113,7 +113,7 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 - file paths
 
 
-📊 Metrics & Inspectability: The pipeline logs key performance metrics and intermediate outputs, enabling quick inspection, reproducibility, and debugging, 
+📊 <span style="color:red">Metrics & Inspectability:</span> The pipeline logs key performance metrics and intermediate outputs, enabling quick inspection, reproducibility, and debugging, 
 - plots and tables are provided.
 - **How to run:** after running the full pipeline: python run_pipeline.py,  generate all plots and metrics summaries by using plots_charts.py
 
