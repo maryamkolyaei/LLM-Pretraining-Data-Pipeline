@@ -42,6 +42,10 @@ STAGES = [
 
      ("Stage 7: sharding",
      ["python", "sharding.py"]),
+
+     ("Stage 8: Export_to_jsonl",
+     ["python", " Export_to_jsonl.py"]),
+
 ]
 
 
