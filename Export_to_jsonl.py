@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Final export step: JSONL with a mandatory 'text' field (non-tokenised).
+Final export step: JSONL with a 'text' field (non-tokenised).
 
 - Input  : a cleaned parquet from your pipeline (e.g. mainpipe_scored_v6.parquet)
 - Output : JSONL where each line has at least:
@@ -39,9 +39,7 @@ EXTRA_FIELDS: Sequence[str] = (
     "quality_score",
 )
 
-# --------------------------------------------------------------------
-# LOGGING
-# --------------------------------------------------------------------
+
 logger = logging.getLogger("export_clean_jsonl")
 logger.setLevel(logging.INFO)
 if not logger.handlers:
@@ -69,18 +67,7 @@ def export_clean_jsonl(
     Export a JSONL with a REQUIRED 'text' field containing the
     non-tokenised cleaned text.
 
-    Parameters
-    ----------
-    parquet_in : str or Path
-        Input Parquet path (e.g. mainpipe_scored_v6.parquet).
-    jsonl_out : str or Path
-        Output JSONL path (e.g. mainpipe_scored_v6_text.jsonl).
-    text_cols_priority : list/tuple of str
-        Ordered list of candidate text columns. First non-empty wins.
-    extra_fields : list/tuple of str
-        Additional columns to carry over if they exist in the dataframe.
-    drop_empty_text : bool
-        If True, rows with empty final 'text' are dropped from the JSONL.
+   
     """
     parquet_in = Path(parquet_in)
     jsonl_out = Path(jsonl_out)
