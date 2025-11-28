@@ -115,6 +115,13 @@ https://huggingface.co/docs/datasets/v1.4.0/loading_datasets.html
 - file paths
 
 
+🧾 Stage 8 — Final Clean JSONL Export (Non-Tokenised text)
+
+Script: export_text_jsonl.py
+Input: mainpipe_scored_v6.parquet
+Output: mainpipe_scored_v6_text.jsonl
+
+
 📊 <span style="color:red">Metrics & Inspectability:</span> The pipeline logs key performance metrics and intermediate outputs, enabling quick inspection, reproducibility, and debugging, 
 - plots and tables are provided.
 - **How to run:** after running the full pipeline: python run_pipeline.py,  generate all plots and metrics summaries by using plots_charts.py
