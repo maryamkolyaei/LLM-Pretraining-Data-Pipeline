@@ -122,11 +122,13 @@ Input: mainpipe_scored_v6.parquet
 Output: mainpipe_scored_v6_text.jsonl
 
 
-📊 <span style="color:red">Metrics & Inspectability:</span> The pipeline logs key performance metrics and intermediate outputs, enabling quick inspection, reproducibility, and debugging, 
+
+
+📊 **Metrics & Inspectability:** The pipeline logs key performance metrics and intermediate outputs, enabling quick inspection, reproducibility, and debugging, 
 - plots and tables are provided.
 - **How to run:** after running the full pipeline: python run_pipeline.py,  generate all plots and metrics summaries by using plots_charts.py
 
-🧨 Scaling Plan (Distributed) and Improvements for future : 
+🧨 **Scaling Plan (Distributed) and Improvements for future :** 
 - The current implementation is lightweight for a take-home exercise, it processes the provided dataset on a single machine in a research compuiting portal equipped with 32 virtual CPUs and 128GB of RAM. I used Python/Pandas for clarity and reproducibility.
   
 -An scalable approach would be:
